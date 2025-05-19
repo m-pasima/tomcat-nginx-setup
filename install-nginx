@@ -1,0 +1,29 @@
+# /etc/nginx/conf.d/tomcat-lb.conf
+# tomcat-lb.conf: HTTP load balancing with basic health checks
+#!/bin/bash
+#
+# Safe, crash-free Nginx installation for Amazon Linux 2023 EC2
+#
+# Usage:
+#   sudo bash install-nginx-amazon-linux.sh
+
+set -euo pipefail
+
+echo "🔸 Updating Amazon Linux 2023 repositories..."
+dnf clean all
+dnf update -y
+
+echo "🔸 Installing Nginx..."
+dnf install -y nginx
+
+echo "🔸 Enabling and starting Nginx service..."
+systemctl enable --now nginx
+
+echo "🔸 Checking firewall status and opening HTTP (port 80)..."
+if systemctl is-active --quiet firewalld; then
+  firewall-cmd --permanent --add-service=http
+  firewall-cmd --reload
+fi
+
+echo "✅ Nginx successfully installed on Amazon Linux 2023!"
+

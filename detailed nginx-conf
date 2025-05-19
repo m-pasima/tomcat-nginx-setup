@@ -1,4 +1,4 @@
-# Create multiple example Nginx config files for teaching purposes
+
 
 config_files = {
     "01-tomcat-lb.conf": """
@@ -108,14 +108,4 @@ server {
 """
 }
 
-# Save all files to /mnt/data as .conf files
-from pathlib import Path
 
-base_path = Path("/mnt/data/nginx-teaching-configs")
-base_path.mkdir(parents=True, exist_ok=True)
-
-for filename, content in config_files.items():
-    (base_path / filename).write_text(content.strip())
-
-# Return folder path
-base_path.name

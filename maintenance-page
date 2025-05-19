@@ -1,0 +1,65 @@
+<!-- /usr/share/nginx/html/maintenance.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Site Maintenance | DevOps Class</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            background: linear-gradient(135deg, #2b5876 0%, #4e4376 100%);
+            color: #fff;
+            text-align: center;
+            padding: 120px 20px;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+        .icon {
+            font-size: 70px;
+            margin-bottom: 25px;
+            color: #ffd700;
+            display: inline-block;
+            animation: spin 3s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(-5deg);}
+            50% { transform: rotate(10deg);}
+            100% { transform: rotate(-5deg);}
+        }
+        h1 {
+            font-size: 50px;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+        p {
+            font-size: 25px;
+            margin-bottom: 10px;
+        }
+        .return-time {
+            font-size: 22px;
+            margin-top: 20px;
+            color: #ffeb3b;
+            background: rgba(0,0,0,0.15);
+            display: inline-block;
+            padding: 8px 25px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+        .footer {
+            margin-top: 60px;
+            font-size: 16px;
+            color: #eee;
+        }
+    </style>
+</head>
+<body>
+    <div class="icon">🛠️</div>
+    <h1>DevOps Class Site is Down for Maintenance</h1>
+    <p>We’ll be back soon! Thanks for your patience.</p>
+    <div class="return-time">
+        Estimated Return: <strong>Today at 4:00 PM</strong>
+    </div>
+    <div class="footer">
+        &copy; 2025 DevOps Academy &mdash; Powered by Nginx & Tomcat
+    </div>
+</body>
+</html>

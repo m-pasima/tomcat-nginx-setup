@@ -3,10 +3,12 @@
 # Nginx Load Balancer for Multiple Tomcat Backends
 # Includes: Weighted load balancing, health checks, performance tuning, security headers
 
+
+
 upstream tomcat_pool {
     # Weighted round-robin: 70% traffic to Tomcat A, 30% to Tomcat B
-    server 172.31.27.222:8080 weight=7 max_fails=3 fail_timeout=30s;   # Tomcat A
-    server 172.31.30.134:8080 weight=3 max_fails=3 fail_timeout=30s;   # Tomcat B
+    server 10.0.139.33:8080 weight=7 max_fails=3 fail_timeout=30s ;   # Tomcat A
+    server 10.0.130.203:8080 weight=3 max_fails=3 fail_timeout=30s ;   # Tomcat B
 }
 
 server {
@@ -18,6 +20,30 @@ server {
     add_header X-Content-Type-Options "nosniff";
     add_header X-XSS-Protection "1; mode=block";
     add_header Referrer-Policy "strict-origin-when-cross-origin";
+
+
+       # -- Maintenance Mode (optional manual trigger) --
+    # Uncomment these lines if you want to trigger maintenance manually with a flag file
+    # if (-f /etc/nginx/maintenance.on) {
+    #     return 503;
+    # }
+
+    error_page 502 503 504 /maintenance.html;
+    error_page 503 @maintenance;
+
+    location = /maintenance.html {
+        root /usr/share/nginx/html;
+        internal;
+    }
+
+    location @maintenance {
+        root /usr/share/nginx/html;
+        rewrite ^(.*)$ /maintenance.html break;
+    }
+
+
+
+
 
     # -- Performance Tuning --
     client_max_body_size        10m;
@@ -75,4 +101,6 @@ server {
         log_not_found off;
     }
 }
+
+
 
